@@ -1,3 +1,5 @@
+package SistemaReserva;
+
 import java.util.Scanner; // Importamos la clase Scanner para leer la entrada del usuario.
 
 public class Cine { // Definimos la clase Cine, que gestiona varias salas de cine.
