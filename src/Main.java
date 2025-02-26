@@ -1,5 +1,8 @@
 import SistemaReserva.Cine;
 import JuegoFizzBuzz.FizzBuzz;
+import Calculadora.CalculadoraSimple;
+
+
 import java.util.Scanner;
 
 public class Main {
@@ -11,14 +14,14 @@ public class Main {
             System.out.println("\n--- Menú Principal ---");
             System.out.println("1. Sistema de Reservas de Cine");
             System.out.println("2. Juego FizzBuzz");
+            System.out.println("3. Calculadora");
             System.out.println("8. Salir");
             System.out.print("Seleccione un ejercicio: ");
             opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
-                    Cine cine = new Cine();
-                    cine.gestionarReservas(); // Llamamos al método que maneja las reservas
+                    new Cine().gestionarReservas();
                     break;
 
                 case 2:
@@ -27,6 +30,9 @@ public class Main {
                     fizzBuzz.jugar();
                     break;
 
+                case 3:
+                    System.out.println("\n--- Calculadora ---");
+                    CalculadoraSimple.iniciarCalculadora();
                 case 8:
                     System.out.println("Saliendo del sistema...");
                     break;
