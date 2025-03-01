@@ -1,72 +1,88 @@
+package Calculadora; // Ubicación en el paquete Calculadora
 
-package Calculadora;
+import java.util.Scanner; // Importamos Scanner para leer datos del usuario.
 
-import java.util.Scanner;
+public class CalculadoraSimple { // Definimos la clase CalculadoraSimple
 
-public class CalculadoraSimple {
-    private double numero1;  // Primer número ingresado por el usuario
-    private double numero2;  // Segundo número ingresado por el usuario
-    private char operacion;  // Operación a realizar (+, -, *, /)
+    // **Atributos privados para encapsulación**
+    private double numero1;
+    private double numero2;
+    private char operacion;
+    private double resultado;
 
-    // Constructor para inicializar los valores
-    public CalculadoraSimple(double numero1, double numero2, char operacion) {
-        this.numero1 = numero1;
-        this.numero2 = numero2;
-        this.operacion = operacion;
+    // **Constructor para inicializar valores**
+    public CalculadoraSimple() {
+        this.numero1 = 0;
+        this.numero2 = 0;
+        this.operacion = ' ';
+        this.resultado = 0;
     }
 
-    // Método para realizar la operación seleccionada
-    public double calcular() {
+    // **Método para tomar datos**
+    public void tomarDatos() {
+        Scanner scanner = new Scanner(System.in); // Crear Scanner para entrada
+
+        System.out.print("Ingrese el primer número: ");
+        this.numero1 = scanner.nextDouble();
+
+        System.out.print("Ingrese el segundo número: ");
+        this.numero2 = scanner.nextDouble();
+
+        System.out.print("Ingrese la operación (+, -, *, /): ");
+        this.operacion = scanner.next().charAt(0); // Lee solo un carácter
+    }
+
+    // **Método para procesar la operación**
+    public void procesarDatos() {
         switch (operacion) {
             case '+':
-                return numero1 + numero2;
+                resultado = numero1 + numero2;
+                break;
             case '-':
-                return numero1 - numero2;
+                resultado = numero1 - numero2;
+                break;
             case '*':
-                return numero1 * numero2;
+                resultado = numero1 * numero2;
+                break;
             case '/':
                 if (numero2 != 0) {
-                    return numero1 / numero2;
+                    resultado = numero1 / numero2;
                 } else {
-                    System.out.println("⚠️ Error: No se puede dividir entre cero.");
-                    return Double.NaN; // Devuelve "No es un número"
+                    System.out.println("⛔ Error: No se puede dividir por 0.");
+                    return;
                 }
+                break;
             default:
                 System.out.println("⚠️ Operación no válida.");
-                return Double.NaN;
+                return;
         }
     }
 
-    // Método estático para iniciar la calculadora con interacción de usuario
+    // **Método para mostrar el resultado**
+    public void mostrarDatos() {
+        if (operacion == '+' || operacion == '-' || operacion == '*' || (operacion == '/' && numero2 != 0)) {
+            System.out.println("Resultado: " + numero1 + " " + operacion + " " + numero2 + " = " + resultado);
+        }
+    }
+
+    // **Método estático para iniciar la calculadora dentro del menú**
     public static void iniciarCalculadora() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); // Scanner para controlar el bucle
         char continuar;
 
         do {
-            System.out.print("Ingrese el primer número: ");
-            double numero1 = scanner.nextDouble();
+            CalculadoraSimple calculadora = new CalculadoraSimple(); // Crear objeto de la calculadora
 
-            System.out.print("Ingrese el segundo número: ");
-            double numero2 = scanner.nextDouble();
+            calculadora.tomarDatos();   // Tomar los datos del usuario
+            calculadora.procesarDatos(); // Procesar la operación
+            calculadora.mostrarDatos();  // Mostrar el resultado
 
-            System.out.print("Ingrese la operación (+, -, *, /): ");
-            char operacion = scanner.next().charAt(0);
-
-            // Crear objeto Calculadora y realizar la operación
-            CalculadoraSimple calculadora = new CalculadoraSimple(numero1, numero2, operacion);
-            double resultado = calculadora.calcular();
-
-            // Mostrar resultado si es válido
-            if (!Double.isNaN(resultado)) {
-                System.out.println("✅ Resultado: " + resultado);
-            }
-
-            // Preguntar si quiere hacer otro cálculo
+            // Preguntar si quiere continuar
             System.out.print("¿Desea realizar otra operación? (s/n): ");
-            continuar = scanner.next().toLowerCase().charAt(0);
+            continuar = scanner.next().charAt(0);
 
-        } while (continuar == 's');
+        } while (continuar == 's' || continuar == 'S'); // Repetir mientras el usuario quiera
 
-        System.out.println("🔚 Saliendo de la calculadora...");
+        System.out.println("¡Calculadora finalizada!");
     }
 }

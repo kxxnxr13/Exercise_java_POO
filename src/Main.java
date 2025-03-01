@@ -10,6 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
+
         do {
             System.out.println("\n--- Menú Principal ---");
             System.out.println("1. Sistema de Reservas de Cine");
