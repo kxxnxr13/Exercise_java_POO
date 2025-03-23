@@ -2,11 +2,11 @@ package SistemaReserva;
 
 import java.util.Scanner;
 
-public class Cine {
+public class Cinee {
     private Sala[] salas; // Array que almacena las salas del cine
 
     // Constructor: Inicializa 3 salas con 10 asientos cada una
-    public Cine() {
+    public Cinee() {
         salas = new Sala[]{
                 new Sala(1, 10),
                 new Sala(2, 10),
